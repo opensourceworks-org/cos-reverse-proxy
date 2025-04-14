@@ -131,8 +131,8 @@ impl ProxyHttp for MyProxy {
 }
 
 pub fn run_server() {
-    // env_logger::init();
-    // dotenv().ok();
+    env_logger::init();
+    dotenv().ok();
     let api_key = env::var("COS_API_KEY").expect("COS_API_KEY environment variable not set");
 
 
