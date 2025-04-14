@@ -2,3 +2,4 @@ target/
 .ibm_cos_creds
 .Idea/
 .env
+.venv/
