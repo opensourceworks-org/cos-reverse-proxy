@@ -5,7 +5,10 @@ use http::Uri;
 
 use tokio::runtime::Runtime;
 use std::env;
-use std::sync::Mutex;
+// use std::sync::Mutex;
+
+use std::sync::{Arc, Mutex};
+use tokio::sync::oneshot;
 
 use pingora::server::configuration::Opt;
 use pingora::server::Server;
@@ -130,15 +133,15 @@ impl ProxyHttp for MyProxy {
     }
 }
 
-pub fn run_server() {
-    env_logger::init();
+pub async fn run_server() {
+    // Initialize environment variables and logging
     dotenv().ok();
+    env_logger::init();
+
     let api_key = env::var("COS_API_KEY").expect("COS_API_KEY environment variable not set");
 
-
-    let rt = Runtime::new().expect("Failed to create Tokio runtime");
-
-    let bearer_token = rt.block_on(get_bearer(api_key));
+    // Use the current runtime handle instead of creating a new runtime
+    let bearer_token = get_bearer(api_key).await;
     if let Err(e) = bearer_token {
         eprintln!("Error getting bearer token: {}", e);
         return;
@@ -162,4 +165,3 @@ pub fn run_server() {
     my_server.add_service(my_proxy);
     my_server.run_forever();
 }
-

@@ -1,7 +1,7 @@
 # **Yet Another Object Storage Reverse Proxy**
 > :warning: **Warning**
 > 
-> Because of an issue with "sfv" crate v0.11.0, we pin it to 0.10.4
+> Because of an [issue](https://github.com/cloudflare/pingora/issues/568) with "sfv" crate v0.11.0, we pin it to 0.10.4
 > ```bash
 > cargo update -p sfv:0.11.0 --precise 0.10.4
 > ```

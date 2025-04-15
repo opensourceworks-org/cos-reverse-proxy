@@ -18,4 +18,5 @@ tokio = { version = "1.44.2", features = ["full"] }
 serde = { version = "1.0.219", features = ["derive"] }
 dotenv = "0.15.0"
 nom = "8.0.0"
+wiremock = "0.6.3"
 # sfv = "=0.10.4"
